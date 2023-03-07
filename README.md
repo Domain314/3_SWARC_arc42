@@ -80,3 +80,22 @@ Folgende Tabelle illustriert die Top 5 Qualitätsziele für die Architektur:
 |  4   | Benutzerfreundlichkeit    | Passwörter sind mit einer starken Verschlüsselung geschützt und können nur von autorisierten Benutzern abgerufen werden.
 |  5   | Zuverlässigkeit | Passwörter sind mit einer starken Verschlüsselung geschützt und können nur von autorisierten Benutzern abgerufen werden.
 
+
+## Stakeholder
+
+1 = Kennt die Architektur
+2 = Muss überzeugt werden
+3 = Arbeitet mit Architektur/Code
+4 = Benötigt Dokumentation
+5 = Trifft Entscheidungen
+
+| Stakeholder | Kontakt | 1 | 2 | 3 | 4 | 5 |
+|-------------|---------|---|---|---|---|---|
+| Projektmanager | projectmanager@example.com | X | - | - | X | X | 
+| Architekt | architect@example.com | X  | - | X | X | X 
+| Entwickler | developer@example.com | X  | - | X | X | - |
+| Tester | tester@example.com | -  | -  | - | X | - |
+| IT-Abteilung | it@example.com | X | X | X | X | X |
+| Geschäftsführung | ceo@example.com | - | X  | - | X | X |
+| Endbenutzer | endbenutzer@example.com | - | X  | - | X | - |
+| Password Cops | password-cop@example.com | -  | -  | -  | -  | - | 
