@@ -83,11 +83,13 @@ Folgende Tabelle illustriert die Top 5 Qualitätsziele für die Architektur:
 
 ## Stakeholder
 
+```
 1 = Kennt die Architektur
 2 = Muss überzeugt werden
 3 = Arbeitet mit Architektur/Code
 4 = Benötigt Dokumentation
 5 = Trifft Entscheidungen
+```
 
 | Stakeholder | Kontakt | 1 | 2 | 3 | 4 | 5 |
 |-------------|---------|---|---|---|---|---|
