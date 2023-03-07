@@ -100,4 +100,23 @@ Folgende Tabelle illustriert die Top 5 Qualitätsziele für die Architektur:
 | IT-Abteilung | it@example.com | X | X | X | X | X |
 | Geschäftsführung | ceo@example.com | - | X  | - | X | X |
 | Endbenutzer | endbenutzer@example.com | - | X  | - | X | - |
-| Password Cops | password-cop@example.com | -  | -  | -  | -  | - | 
+| Password Cops | password-cop@example.com | -  | -  | -  | -  | - |
+
+
+## Randbedingungen
+
+| Randbedingung | Erläuterung | Kategorie |
+|------|---------------|----------|
+| Kompatibilität mit bestehenden Systemen | Das neue System muss in die bestehende IT-Infrastruktur des Unternehmens integriert werden und die Anforderungen der bestehenden Systeme erfüllen. | Technisch |
+| Budgetbeschränkungen | Das Projekt muss innerhalb eines festgelegten Budgets durchgeführt werden, was Einschränkungen bezüglich der verwendeten Technologien und des Umfangs des Projekts mit sich bringt. | Organisatorisch |
+| Datenschutz- und Sicherheitsvorgaben | Die Application muss den geltenden Datenschutz- und Sicherheitsvorschriften entsprechen und die Vertraulichkeit und Integrität der gespeicherten Daten sicherstellen. | Technisch |
+| Vorgaben bezüglich Benutzeroberfläche | Das Produkt muss eine benutzerfreundliche Oberfläche aufweisen und dessen Design bestimmte CI/CD Richtlinien einhalten. (Corporate Indentity/Corporate Design) | Technisch |
+| Anforderungen an die Skalierbarkeit | Das System muss in der Lage sein, an zukünftige Anforderungen anzupassen und skaliert werden zu können. | Technisch |
+| Integrationserfordernisse | Das Backend muss in der Lage sein, mit anderen Systemen und Tools des Unternehmens zu integrieren und Daten auszutauschen | Technisch |
+| Compliance-Anforderungen | Das Produkt muss bestimmten Regulierungen und Standards entsprechen, wie z.B. PCI-DSS in Bezug auf Sicherheit der Zahlungsinformationen | Technisch |
+| Vorgaben bezüglich des Einsatzes von Third-Party-Tools und Bibliotheken | Das Projekt muss bestimmte Anforderungen an die Verwendung von Third-Party-Tools und Bibliotheken erfüllen. z.B. Lizenzbedingungen und Support-Anforderungen. | Technisch |
+
+
+| title | title | title |
+|-------|-------|-------|
+| text | text | text |
