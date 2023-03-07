@@ -74,18 +74,13 @@ Folgende Tabelle illustriert die Top 5 Qualitätsziele für die Architektur:
 
 | Prio | Qualitätsziel | Use-Case |
 |------|---------------|----------|
-|  1   | Sicherheit    | Passwörter sind mit einer starken Verschlüsselung geschützt und
-können nur von autorisierten Benutzern abgerufen werden.
+|  1   | Sicherheit    | Passwörter sind mit einer starken Verschlüsselung geschützt und können nur von autorisierten Benutzern abgerufen werden.
 |------|---------------|----------|
-|  2   | Skalierbarkeit    | Passwörter sind mit einer starken Verschlüsselung geschützt und
-können nur von autorisierten Benutzern abgerufen werden.
+|  2   | Skalierbarkeit    | Passwörter sind mit einer starken Verschlüsselung geschützt und können nur von autorisierten Benutzern abgerufen werden.
 |------|---------------|----------|
-|  3   | Wiederverwendbarkeit    | Passwörter sind mit einer starken Verschlüsselung geschützt und
-können nur von autorisierten Benutzern abgerufen werden.
+|  3   | Wiederverwendbarkeit    | Passwörter sind mit einer starken Verschlüsselung geschützt und können nur von autorisierten Benutzern abgerufen werden.
 |------|---------------|----------|
-|  4   | Benutzerfreundlichkeit    | Passwörter sind mit einer starken Verschlüsselung geschützt und
-können nur von autorisierten Benutzern abgerufen werden.
+|  4   | Benutzerfreundlichkeit    | Passwörter sind mit einer starken Verschlüsselung geschützt und können nur von autorisierten Benutzern abgerufen werden.
 |------|---------------|----------|
-|  5   | Zuverlässigkeit | Passwörter sind mit einer starken Verschlüsselung geschützt und
-können nur von autorisierten Benutzern abgerufen werden.
+|  5   | Zuverlässigkeit | Passwörter sind mit einer starken Verschlüsselung geschützt und können nur von autorisierten Benutzern abgerufen werden.
 
