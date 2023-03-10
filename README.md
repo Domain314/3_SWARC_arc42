@@ -123,3 +123,6 @@ Folgende Tabelle illustriert die Top 5 Qualitätsziele für die Architektur:
 
 
 
+
+
+Score: 100/100
