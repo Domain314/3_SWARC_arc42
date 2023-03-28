@@ -106,29 +106,29 @@ Folgende Tabelle illustriert die Top 5 Qualitätsziele für die Architektur:
 
 ## Kontextabgrenzung
 
-# Kommunikation mit dem Backend-Server:
+### Kommunikation mit dem Backend-Server:
 Motivation: Um User Login, User Passwörter und andere Daten speichern und abzurufen.
 Fachlichen Komponente: API
 Technischen Komponente: HTTP-Protokoll
 
-# Kommunikation mit der PasswordCop API:
+### Kommunikation mit der PasswordCop API:
 Motivation: Nutzung einer dedizierte API (PasswordCop API), die von einem externen
 Unternehmen (Password Cops) entwickelt wurde, um die Sicherheit von Passwörtern zu
 validieren.
 Fachlichen Komponente: API
 Technischen Komponente: HTTPS-Protokoll.
 
-# CSV-Import/Export-Funktion:
+### CSV-Import/Export-Funktion:
 Motivation: User Passwörter als CSV-Dateien importieren und exportieren.
 Fachlichen Komponente: Benutzeroberfläche
 Technischen Komponente Dateisystem
 
-# Kommunikation mit Benutzern:
+### Kommunikation mit Benutzern:
 Motivation: Benutzerfreundliche Oberfläche.
 Fachlichen Komponente: Benutzeroberfläche
 Technischen Komponente (Web-Oberfläche).
 
-# Kommunikation mit der IT-Abteilung:
+### Kommunikation mit der IT-Abteilung:
 Motivation: Das System muss mit der IT-Abteilung des Unternehmens zusammenarbeiten,
 um in die bestehende IT-Infrastruktur integriert zu werden und betrieben zu werden.
 Fachlichen Komponente: Dokumentation der Architektur
