@@ -1,4 +1,4 @@
-# SAWRC_arc42
+# SWARC_arc42
 Software Architecture - arc42 filled out (German)
 
 ### MasterPW NG
@@ -44,19 +44,6 @@ um sicherzustellen, dass das System ihre Anforderungen erfüllt.
 
 ## Aufgabenstellung
 
-Die fachliche Aufgabenstellung ist, ein System zur sicheren Speicherung und Verwaltung
-von Passwörtern zu entwickeln, wobei es auch die Passwortstärke über eine dedizierte API
-testen und Berichte darüber zur Verfügung zu stellen soll. Weiters soll es Passwörter als
-CSV-Dateien ex- und importieren. Das Backend muss für anspruchsvollere
-Benutzeroberflächen wiederverwendbar sein und für mehrere Benutzer gleichzeitig
-erreichbar sein.
-Die treibenden Kräfte hinter dem Projekt sind die Erhöhung der Produktivität und die
-Verbesserung der Sicherheit von Passwörtern. Dabei soll das System einfach zu bedienen,
-sicher und zuverlässig sein.
-
-Artjom Moisejev if21b055 Nicolas Pozdena if21b057
-3
-Aufgabenstellung
 Die fachliche Aufgabenstellung ist, ein System zur sicheren Speicherung und Verwaltung
 von Passwörtern zu entwickeln, wobei es auch die Passwortstärke über eine dedizierte API
 testen und Berichte darüber zur Verfügung zu stellen soll. Weiters soll es Passwörter als
@@ -115,6 +102,53 @@ Folgende Tabelle illustriert die Top 5 Qualitätsziele für die Architektur:
 | Integrationserfordernisse | Das Backend muss in der Lage sein, mit anderen Systemen und Tools des Unternehmens zu integrieren und Daten auszutauschen | Technisch |
 | Compliance-Anforderungen | Das Produkt muss bestimmten Regulierungen und Standards entsprechen, wie z.B. PCI-DSS in Bezug auf Sicherheit der Zahlungsinformationen | Technisch |
 | Vorgaben bezüglich des Einsatzes von Third-Party-Tools und Bibliotheken | Das Projekt muss bestimmte Anforderungen an die Verwendung von Third-Party-Tools und Bibliotheken erfüllen. z.B. Lizenzbedingungen und Support-Anforderungen. | Technisch |
+
+
+## Kontextabgrenzung
+
+# Kommunikation mit dem Backend-Server:
+Motivation: Um User Login, User Passwörter und andere Daten speichern und abzurufen.
+Fachlichen Komponente: API
+Technischen Komponente: HTTP-Protokoll
+
+# Kommunikation mit der PasswordCop API:
+Motivation: Nutzung einer dedizierte API (PasswordCop API), die von einem externen
+Unternehmen (Password Cops) entwickelt wurde, um die Sicherheit von Passwörtern zu
+validieren.
+Fachlichen Komponente: API
+Technischen Komponente: HTTPS-Protokoll.
+
+# CSV-Import/Export-Funktion:
+Motivation: User Passwörter als CSV-Dateien importieren und exportieren.
+Fachlichen Komponente: Benutzeroberfläche
+Technischen Komponente Dateisystem
+
+# Kommunikation mit Benutzern:
+Motivation: Benutzerfreundliche Oberfläche.
+Fachlichen Komponente: Benutzeroberfläche
+Technischen Komponente (Web-Oberfläche).
+
+# Kommunikation mit der IT-Abteilung:
+Motivation: Das System muss mit der IT-Abteilung des Unternehmens zusammenarbeiten,
+um in die bestehende IT-Infrastruktur integriert zu werden und betrieben zu werden.
+Fachlichen Komponente: Dokumentation der Architektur
+Technischen Komponente: Systeminstallation, -konfiguration und -betrieb
+
+
+## Fachlicher Kontext
+
+| Kommunikationsbeziehung | Eingabe | Ausgabe |
+|-------|-------|-------|
+| Backend-Server  | Passwort-Informationen im JSON-Format | Bestätigung des erfolgreichen Speicherns oder Abrufens von Passwort-Informationen im JSON- Format |
+| PasswordCop API | Passwort im Klartext | Validierungsbericht zur Passwortstärke im JSON-Format |
+| CSV-Import/Export | CSV-Datei mit Passwort-Informationen | Bestätigung des erfolgreichen Imports oder Exports von Passwort-Informationen |
+| Benutzer | Anforderungen an das Passwort-Management (z.B. Passwort erstellen, importieren, exportieren) über die Benutzeroberfläche | Angezeigte Passwort- Informationen und Validierungsberichte in der Benutzeroberfläche |
+| IT-Abteilung | Dokumentation der System-Architektur und Anforderungen an die Integration in die bestehende IT-Infrastruktur | Bestätigung der erfolgreichen Integration und Bereitstellung des Systems |
+
+
+
+
+
 
 
 | title | title | title |
