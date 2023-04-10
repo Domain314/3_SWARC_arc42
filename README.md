@@ -157,8 +157,4 @@ Technischen Komponente: Systeminstallation, -konfiguration und -betrieb
 
 
 
-
-
-
-
 Score: 100/100
