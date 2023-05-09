@@ -239,7 +239,7 @@ Beschreibung: Nachdem der User authentifiziert wurde, wird die Passwordstärke m
 
 Beschreibung: Nachdem der User authentifiziert wurde, wird das eingegebene Passwort abgerufen, entschlüsselt und ausgegeben
   
-# Passwörter ist nicht stark genug
+# Passwort ist nicht stark genug
   
 ![image](https://github.com/Domain314/3_SWARC_arc42/assets/65196868/a86a658c-280f-4c53-9f96-6645ba285d34)
  
