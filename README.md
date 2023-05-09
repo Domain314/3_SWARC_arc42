@@ -146,15 +146,126 @@ Technischen Komponente: Systeminstallation, -konfiguration und -betrieb
 | IT-Abteilung | Dokumentation der System-Architektur und Anforderungen an die Integration in die bestehende IT-Infrastruktur | Bestätigung der erfolgreichen Integration und Bereitstellung des Systems |
 
 
+## Technischer Kontext
+
+| Kommunikationskanal | Eingabe | Ausgabe |
+| HTTPS-Verbindung zum Backend-Server | Passwort-Informationen im JSON-Format | Bestätigung des erfolgreichen Speicherns oder Abrufens von Passwort-Informationen im JSON-Format |
+| HTTPS-Verbindung zur PasswordCop API | Passwort im Klartext | Validierungsbericht zur Passwortstärke im JSON-Format |
+| Dateisystem für CSV-Import/Export | CSV-Datei mit Passwort-Informationen | Bestätigung des erfolgreichen Imports oder Exports von Passwort-Informationen |
+| Web-basierte Benutzeroberfläche | Anforderungen an das Passwort-Management (z.B. Passwort erstellen, importieren, exportieren) | Angezeigte Passwort-Informationen und Validierungsberichte |
+| SSH/RDP Verbindung zu IT Abteilung | Dokumentation der System-Architektur und Anforderungen an die Integration | Bestätigung der erfolgreichen Integration und Bereitstellung des Systems |
 
 
+## Lösungsstrategie
+
+Die zentralen Entwurfsentscheidungen des Systems beinhalten:
+- Die Verwendung einer modernen Programmiersprache und Technologie-Stack für Server- und Client-Seite, um Anforderungen an Performance, Skalierbarkeit und Sicherheit zu erfüllen
+- Eine saubere Trennung der Schichten (Präsentationsschicht, Geschäftslogik und Datenschicht) um Flexibilität und Wiederverwendbarkeit zu erhöhen
+- Eine integrierte Passwortstärken-Prüfung durch die Verwendung einer dedizierten API, um die Sicherheit von Passwörtern zu gewährleisten
+- Eine Benutzeroberflächen-Design unter Berücksichtigung der Usability-Standards
+- Agile Entwicklungsmethoden um einen reibungslosen Ablauf des Projekts zu gewährleisten und Aufgaben und Verantwortungen klar zu delegieren
+
+
+## Bausteinsicht
+
+# Whitebox Gesamtsystem
+![image](https://github.com/Domain314/3_SWARC_arc42/assets/65196868/8769a64a-2ab2-44ac-9b64-c3c3c71c145a)
+
+Begründung:
+Die Aufteilung der Verantwortlichkeiten der Bausteine ist geplant so dass einzelne Teile durch andere Funktionalitäten ausgetauscht werden können ohne die anderen Bausteine zu beeinflussen.
+
+Enthaltene Bausteine:
+In der ersten Ebene des Gesamtsystems sind folgende essentielle Bausteine vorhanden: der ClientHandler, der APIHandler, der BackendServer und der LocalStorage.
+
+Wichtige Schnittstellen:
+Der PasswordSafe bietet via dem ClientHandler dem User die Schnittstelle für Input und Output.
+Weiters wird die externe Schnittstelle der PasswordCopAPI verwendet um Passwortsicherheit zu gewährleisten
+
+# ClientHandler
+- Verwaltet den Input und Output mit dem User.
+- Bietet dem User eine Schnittstelle um mit dem PasswordSafe zu interagieren und verwendet die vom BackendServer bereitgestellte Schnittstelle
+
+# APIHandler
+- Steuert die Kommunikation mit der PasswordCopAPI.
+- Stellt dem BackendServer die PasswordCopAPI zur Verfügung.
+- Beinhaltet das Exceptionhandling wenn die PasswordCopAPI nicht erreichbar ist.
+- Als separate Blackbox vom BackendServer erlaubt es der APIHandler jederzeit die API zur Überprüfung der Passwörter zu ändern ohne den BackendServer zu beeinflussen.
+
+# BackendServer
+- Verwaltet die Request des Users welche vom ClientHandler weitergereicht werden (Abfragen, Ändern und Hinzufügen von Passwörtern)
+- Kümmert sich um die Authentifizierung der User
+- Stellt das Bindeglied zwischen LocalStorage, ClientHandler und APIHandler
+
+# LocalStorage
+- Verarbeitet Schreib- und Leseanfragen and die Passwortdatenbank.
+- Beinhaltet die Ver- und Entschlüsselung von Passwörter
+
+
+
+# Ebene 2
+
+# LocalStorage <Import/ExportHandler>
+- Der Import/ExportHandler nimmt Passwörter oder Listen an Passwörtern vom
+- BackendServer entgegen und gibt auch einzelne Passwörter oder Listen an Passwörtern zurück.
+
+# LocalStorage <DE/EncryptionHandler>
+- Nimmt Passwörter oder verschlüsselte Zeichenketten entgegen und gibt verschlüsselte
+- Zeichenketten oder entschlüsselte Passwörter zurück.
+
+# LocalStorage <DatabaseHandler>
+- Schreibt oder liest gespeicherte Passwortdaten aus.
+  
+# BackendServer <RequestHandler>
+- Nimmt die Requests aus dem ClientHandler entgegen und schickt Responses mit den Daten
+- welche aus anderen Bausteinen gesammelt wurden.
+
+# BackendServer <AuthenticationHandler>
+- Nimmt AuthenticationRequests entgegen und authentifiziert die User gegen eine gewünschte
+- Directory
+
+  
+  
+  
+## Laufzeitsicht
+  
+# Passwort hinzufügen
+![image](https://github.com/Domain314/3_SWARC_arc42/assets/65196868/c52c05d5-403e-4654-b8f1-7cbe633e982e)
+
+Beschreibung: Nachdem der User authentifiziert wurde, wird die Passwordstärke mittels dedizierter API von PaswordCop geprüft und ausgegeben. Beim Bestehen des Tests wird das Passwort an den LocalStorage gesendet, verschlüsselt und gespeichert.
+  
+  
+# Passwort abfragen  
+![image](https://github.com/Domain314/3_SWARC_arc42/assets/65196868/fad93237-429d-4202-8e61-eb88699a3f9a)
+
+Beschreibung: Nachdem der User authentifiziert wurde, wird das eingegebene Passwort abgerufen, entschlüsselt und ausgegeben
+  
+# Passwörter ist nicht stark genug
+  
+![image](https://github.com/Domain314/3_SWARC_arc42/assets/65196868/a86a658c-280f-4c53-9f96-6645ba285d34)
+ 
+Beschreibung: Wenn die Passwortstärke die Tests von PasswordCop nicht besteht, wird eine Fehlermeldung ausgegeben.  
+  
+  
+ 
+## Verteilungssicht
+  
+![image](https://github.com/Domain314/3_SWARC_arc42/assets/65196868/27f4f128-6e60-46f4-9f94-6c3d422c8935)
+  
+Begründung
+Da die Anforderungen sowohl Wiederverwendbarkeit als auch eine REST-Schnittstelle fordern ist die Kommunikation zwischen den einzelnen Bausteinen auf JSON und HTTPS Basis. Hierbei können Werte sowohl als einzelne Passwörter als auch als Listen übertragen werden.
+  
+Qualitäts- und/oder Leistungsmerkmale
+HTTPS und JSON erlauben nicht nur für eine verschlüsselte und sichere Übertragung sondern bieten zukünftigen Entwicklern auch eine Möglichkeit der Lesbarkeit der einzelnen Kommunikationskomponenten, da JSON auch für einen Menschen verständlich aufgebaut ist
+  
+  
+  
+  
+  
+  
+  
+  
 
 (UNFINISHED)
-
-
-
-
-
 | title | title | title |
 |-------|-------|-------|
 | text | text | text |
