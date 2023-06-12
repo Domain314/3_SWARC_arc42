@@ -281,5 +281,6 @@ HTTPS und JSON erlauben nicht nur für eine verschlüsselte und sichere Übertra
 
 
 
+
 Score: 100/100
 
