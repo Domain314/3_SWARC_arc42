@@ -42,7 +42,7 @@ Endbenutzer, IT-Abteilung und Geschäftsführung, müssen berücksichtigt werden
 um sicherzustellen, dass das System ihre Anforderungen erfüllt.
 
 
-## Aufgabenstellung
+### Aufgabenstellung
 
 Die fachliche Aufgabenstellung ist, ein System zur sicheren Speicherung und Verwaltung
 von Passwörtern zu entwickeln, wobei es auch die Passwortstärke über eine dedizierte API
