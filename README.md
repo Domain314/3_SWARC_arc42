@@ -257,6 +257,131 @@ Da die Anforderungen sowohl Wiederverwendbarkeit als auch eine REST-Schnittstell
 Qualitäts- und/oder Leistungsmerkmale
 HTTPS und JSON erlauben nicht nur für eine verschlüsselte und sichere Übertragung sondern bieten zukünftigen Entwicklern auch eine Möglichkeit der Lesbarkeit der einzelnen Kommunikationskomponenten, da JSON auch für einen Menschen verständlich aufgebaut ist
   
+ 
+  
+## Querschnittliche Konzepte
+  
+![image](https://github.com/Domain314/3_SWARC_arc42/assets/65196868/c208a74a-402e-496c-82c6-dd1ce32a7841)
+
+## User Experience
+Mit einer Benutzeroberfläche welche Usern den Import und Export von Passwörtern sowie das
+einfache Abfragen, Hinzufügen und Ändern von Passwörtern erlaubt, kann diese Lösung
+Berührungsängsten mit dem neuen PasswortSafe vorbeugen.
+  
+## Sicherheitskonzepte
+Wie bereits in vorherigen Teilen des ARC42 Templates erwähnt wurde, ist ein großer Teil der
+Sicherheit auf Basis von Authentifizierung und Verschlüsselung. Sämtliche Passwortdaten
+werden verschlüsselt gespeichert und nur authentifizierte User können auf ihre Passwörter
+zugreifen.
+  
+## Betriebskonzepte
+Da die Lösung auf den eigenen Firmenservern gehostet wird bietet es den Usern eine hohe
+Verfügbarkeit im Firmennetzwerk an. Die Anzahl an Passwortdaten und Usern kann beliebig
+gewählt werden und bietet daher eine ausgezeichnete Skalierbarkeit.
+  
+## Unter-der-Haube
+Auftretende Fehler welche sowohl vom User (z.B. Password entspricht nicht den
+Anforderungen) als auch vom System (z.B. Nicht-Erreichbarkeit von PasswordCop)
+werden erkannt und als verständliche Fehlermeldung an den User übermittelt.
+  
+  
+## Entwurfsentscheidungen
+  
+Datenbankdesign: Mit einem MongoDB/JSON Backend, welches über eine API
+kommuniziert, haben wir die Möglichkeit die Datensätze beliebig zu skalieren und mit
+modernen Datenbanktechnologien zu arbeiten.
+  
+Verschlüsselungstechnologie: Eine starke Verschlüsselungstechnologie (AES-256),
+ermöglicht die Passwörter langfristig zu schützen und sicherzustellen, dass sie nur von
+autorisierten Benutzern abgerufen werden können.
+  
+Password-Cops API: Die Passwortstärke wird über eine dedizierte API kalkuliert, somit
+legen wir die Verantwortung aus, auf dem aktuellsten Stand der Passwort-Stärke zu
+bleiben und auch die betrieblichen Kosten der Kalkulationen selbst, bleiben uns erspart.
+(Siehe Laufzeitsicht)
+  
+Wiederverwendbarkeit: Eine modularisierte Architektur, um das Backend schnell und
+einfach an andere Frontends anzubinden und um es für die Entwicklung von
+verschiedenen Clients zu nutzen. (Siehe Whitebox)
+  
+Local Storage: Die Passwörter werden auch lokal gespeichert, um den offline Betrieb zu
+ermöglichen und auch um die eigenen Server zu schonen.
+  
+Benutzerfreundlichkeit: Die Gestaltung einer intuitiven Benutzeroberfläche, um das
+System einfach zu bedienen.
+  
+CSV-Import/Export: Die Passwörter werden als CSV exportiert, da es der gängige und
+kompatible Weg ist, um es auch mit anderen Applikationen und Webanwendungen zu
+benutzen. Alternativ wäre eine proprietäres Datenformat, um die sichere Ablage zu
+gewährleisten, jedoch wäre dies nicht kompatibel mit anderen Anwendungen
+  
+Zuverlässigkeit: Das System ist verfügbar und fehlerfrei, auch unter Lastbedingungen und
+hoher Benutzeraktivität.
+  
+  
+## Qualitätsbaum  
+  
+![image](https://github.com/Domain314/3_SWARC_arc42/assets/65196868/15771294-5e40-490a-9e4e-a78902f58b5e)
+ 
+  
+  
+## Qualitätsszenarien
+  
+| Titel | Szenario | Output |
+|-------|-------|-------|
+| Abrufen von Passwörtern | Der Benutzer gibt seine Anmeldeinformationen ein und wählt das gewünschte Passwort aus. | Entschlüsselung des Passworts und Ausgabe an den Benutzer. |
+| Erstellung eines neuen Passworts | Der Benutzer möchte ein Passwort speichern | Prüfung der Passwortstärke mithilfe der integrierten API und Ausgabe eines Validierungsberichts. Wenn das Passwort den Anforderungen entspricht, wird es verschlüsselt gespeichert |
+| Passwort Importieren | Der Benutzer möchte seine Passwörter vom Backup importieren. | Der Benutzer lädt eine CSV-Datei mit Passwort-Informationen hoch. Das System importiert die Passwörter, prüft ihre Stärke und speichert sie verschlüsselt. |
+| Passwort Exportieren | Der Benutzer möchte seine Passwörter als Backup exportieren. | Der Benutzer wählt die Passwörter aus, die er exportieren möchte und das System erstellt eine CSV-Datei mit den ausgewählten Passwort-Informationen. |
+| Mehrbenutzerunter stützung | Ein Unternehmen möchte die Passwörter der Mitarbeiter verwalten. | Ein Admin erstellt neue Benutzeraccounts und gibt diesen Zugriffsrechte auf bestimmte Passwörter. Jeder Benutzer kann nur auf die ihm zugewiesenen Passwörter zugreifen und verändern. |
+| Passwortänderung | Ein User möchte sein Passwort ändern | Erneute Überprüfung der Passwortstärke. Anschließend verschlüsseln und speichern. |
+| Passwort-Ablauf  | Ein User hat sein Passwort zu lange nicht gewechselt | Die Application hat eine Funktionalität eingebaut, um sicherzustellen, dass Passwörter regelmäßig geändert werden. Wenn ein Passwort abläuft, wird der Benutzer benachrichtigt und aufgefordert, ein neues Passwort zu erstellen. |
+| Sicherheitsbericht  | Der User möchte einen Bericht zur Sicherheit seiner Passwörter. | Das System generiert einen Bericht, der die Stärke der Passwörter, sowie deren Alter und Letztes Änderungsdatum enthält. |
+  
+  
+## Risiken und technische Schulden
+  
+| Risiko | Szenario | Lösung |
+|-------|-------|-------|
+| Performance | Hohe Last  | Optimierung der Datenbankabfragen und Implementierung von Caching-Mechanismen. |
+| Sicherheitsrisiko | Angriff auf die Passwortdatenbank | Erhöhung der Passwortverschlüsselung und Implementierung von Sicherheitsmechanismen wie Zwei-Faktor-Authentifizierung |
+| Wartbarkeit | Komplizierte Updates zB.: tiefgreifende Sicherheitsupdates | Implementierung von automatisierten Tests, um die Qualität des Codes zu gewährleisten und zukünftige Änderungen zu erleichtern. |
+| Usability | Die Benutzeroberfläche des Systems zu kompliziert | Durchführung von Usability-Tests und Implementierung von Verbesserungsvorschlägen aus dem Feedback der Benutzer. |
+| Skalierbarkeit | Anzahl der Benutzer oder die Anzahl der gespeicherten Passwörter steigt zu schnell an. | Analysieren des Systems auf skalierbarkeitsschwache Stellen und Implementierung von Skalierungsmaßnahmen wie horizontaler Skalierung oder den Einsatz von Cloud-Technologien |
+| Kompatibilität | Ungetestete Umgebung zB: Linux | Überprüfung der Kompatibilität des Systems mit anderen Systemen und Plattformen und gegebenenfalls Anpassungen vornehmen. |
+| Verfügbarkeitsrisiko | Zu viele Anfragen gleichzeitig oder wenn es zu Fehlern oder Ausfällen kommt. | Implementierung von Maßnahmen zur Erhöhung der Verfügbarkeit des Systems, wie zum Beispiel die Verwendung von redundanter Hardware oder die Verwendung von Lastverteilungs-Technologien. |
+  
+  
+## Glossar
+  
+| Begriff | Definition |
+|-------|-------|
+| Autorisierung | Prozess, bei dem festgestellt wird, ob ein Benutzer das Recht hat, auf eine bestimmte Ressource zuzugreifen. |
+| Verschlüsselung | Verfahren zur Umwandlung von Klartext in verschlüsselten Text, um die Datensicherheit zu erhöhen. |
+| Passwortstärketest | Überprüfung, ob ein Passwort bestimmte Kriterien erfüllt, die für eine sichere Verwendung empfohlen werden |
+| Import/Export  | Übertragung von Daten in oder aus einem System. |
+| Datenbank | System zur Speicherung, Verwaltung und Abfrage von Daten. |
+| Backend | Teil eines Systems, der sich um die Verarbeitung von Daten kümmert, aber nicht direkt vom Benutzer interagiert |
+| Frontend | Teil eines Systems, der die Benutzerinteraktion ermöglicht und die Daten vom Backend anzeigt. |
+| Anwendungsserver | Server, auf dem Anwendungen ausgeführt werden. |
+| Benutzeroberfläche/UI  | Schnittstelle zwischen Benutzer und System, die es ermöglicht, mit dem System zu interagieren. |
+| Datensicherheit | Schutz von Daten vor unbefugtem Zugriff, Veränderung oder Löschung. |
+| Skalierbarkeit | Fähigkeit eines Systems, bei steigender Last gleichbleibend effizient zu arbeiten. |
+| Zuverlässigkeit | Fähigkeit eines Systems, korrekt und verlässlich zu funktionieren. |
+| Benutzerfreundlichkeit  | Einfachheit und Intuitivität der Benutzererfahrung. |
+| API-Schnittstelle  | Schnittstelle, die es ermöglicht, auf die Funktionalität eines Backends über das Web zuzugreifen. |
+| Netzwerksicherheit  | Schutz von Netzwerken vor Cyberbedrohungen. |
+| Passwortmanagement  | Verwaltung von Passwörtern, einschließlich Generierung, Speicherung und Verwaltung. |
+| Schlüsselmanagement | Verwaltung von Kryptografischen Schlüsseln, einschließlich Generierung, Speicherung und Verwaltung |
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
