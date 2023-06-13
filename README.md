@@ -149,6 +149,7 @@ Technischen Komponente: Systeminstallation, -konfiguration und -betrieb
 ### Technischer Kontext
 
 | Kommunikationskanal | Eingabe | Ausgabe |
+|-------|-------|-------|
 | HTTPS-Verbindung zum Backend-Server | Passwort-Informationen im JSON-Format | Bestätigung des erfolgreichen Speicherns oder Abrufens von Passwort-Informationen im JSON-Format |
 | HTTPS-Verbindung zur PasswordCop API | Passwort im Klartext | Validierungsbericht zur Passwortstärke im JSON-Format |
 | Dateisystem für CSV-Import/Export | CSV-Datei mit Passwort-Informationen | Bestätigung des erfolgreichen Imports oder Exports von Passwort-Informationen |
