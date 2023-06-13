@@ -55,7 +55,7 @@ Verbesserung der Sicherheit von Passwörtern. Dabei soll das System einfach zu b
 sicher und zuverlässig sein.
 
 
-## Qualitätsziele
+### Qualitätsziele
 
 Folgende Tabelle illustriert die Top 5 Qualitätsziele für die Architektur:
 
@@ -68,7 +68,7 @@ Folgende Tabelle illustriert die Top 5 Qualitätsziele für die Architektur:
 |  5   | Zuverlässigkeit | Passwörter sind mit einer starken Verschlüsselung geschützt und können nur von autorisierten Benutzern abgerufen werden.
 
 
-## Stakeholder
+### Stakeholder
 
 ```
 1 = Kennt die Architektur
@@ -106,36 +106,36 @@ Folgende Tabelle illustriert die Top 5 Qualitätsziele für die Architektur:
 
 ## Kontextabgrenzung
 
-### Kommunikation mit dem Backend-Server:
+**Kommunikation mit dem Backend-Server:**
 Motivation: Um User Login, User Passwörter und andere Daten speichern und abzurufen.
 Fachlichen Komponente: API
 Technischen Komponente: HTTP-Protokoll
 
-### Kommunikation mit der PasswordCop API:
+**Kommunikation mit der PasswordCop API:**
 Motivation: Nutzung einer dedizierte API (PasswordCop API), die von einem externen
 Unternehmen (Password Cops) entwickelt wurde, um die Sicherheit von Passwörtern zu
 validieren.
 Fachlichen Komponente: API
 Technischen Komponente: HTTPS-Protokoll.
 
-### CSV-Import/Export-Funktion:
+**CSV-Import/Export-Funktion:**
 Motivation: User Passwörter als CSV-Dateien importieren und exportieren.
 Fachlichen Komponente: Benutzeroberfläche
 Technischen Komponente Dateisystem
 
-### Kommunikation mit Benutzern:
+**Kommunikation mit Benutzern:**
 Motivation: Benutzerfreundliche Oberfläche.
 Fachlichen Komponente: Benutzeroberfläche
 Technischen Komponente (Web-Oberfläche).
 
-### Kommunikation mit der IT-Abteilung:
+**Kommunikation mit der IT-Abteilung:**
 Motivation: Das System muss mit der IT-Abteilung des Unternehmens zusammenarbeiten,
 um in die bestehende IT-Infrastruktur integriert zu werden und betrieben zu werden.
 Fachlichen Komponente: Dokumentation der Architektur
 Technischen Komponente: Systeminstallation, -konfiguration und -betrieb
 
 
-## Fachlicher Kontext
+### Fachlicher Kontext
 
 | Kommunikationsbeziehung | Eingabe | Ausgabe |
 |-------|-------|-------|
@@ -146,7 +146,7 @@ Technischen Komponente: Systeminstallation, -konfiguration und -betrieb
 | IT-Abteilung | Dokumentation der System-Architektur und Anforderungen an die Integration in die bestehende IT-Infrastruktur | Bestätigung der erfolgreichen Integration und Bereitstellung des Systems |
 
 
-## Technischer Kontext
+### Technischer Kontext
 
 | Kommunikationskanal | Eingabe | Ausgabe |
 | HTTPS-Verbindung zum Backend-Server | Passwort-Informationen im JSON-Format | Bestätigung des erfolgreichen Speicherns oder Abrufens von Passwort-Informationen im JSON-Format |
@@ -168,82 +168,78 @@ Die zentralen Entwurfsentscheidungen des Systems beinhalten:
 
 ## Bausteinsicht
 
-# Whitebox Gesamtsystem
+### Whitebox Gesamtsystem
 ![image](https://github.com/Domain314/3_SWARC_arc42/assets/65196868/8769a64a-2ab2-44ac-9b64-c3c3c71c145a)
 
-Begründung:
+**Begründung:**
 Die Aufteilung der Verantwortlichkeiten der Bausteine ist geplant so dass einzelne Teile durch andere Funktionalitäten ausgetauscht werden können ohne die anderen Bausteine zu beeinflussen.
 
-Enthaltene Bausteine:
+**Enthaltene Bausteine:**
 In der ersten Ebene des Gesamtsystems sind folgende essentielle Bausteine vorhanden: der ClientHandler, der APIHandler, der BackendServer und der LocalStorage.
 
-Wichtige Schnittstellen:
+**Wichtige Schnittstellen:**
 Der PasswordSafe bietet via dem ClientHandler dem User die Schnittstelle für Input und Output.
 Weiters wird die externe Schnittstelle der PasswordCopAPI verwendet um Passwortsicherheit zu gewährleisten
 
-# ClientHandler
+### ClientHandler
 - Verwaltet den Input und Output mit dem User.
 - Bietet dem User eine Schnittstelle um mit dem PasswordSafe zu interagieren und verwendet die vom BackendServer bereitgestellte Schnittstelle
 
-# APIHandler
+### APIHandler
 - Steuert die Kommunikation mit der PasswordCopAPI.
 - Stellt dem BackendServer die PasswordCopAPI zur Verfügung.
 - Beinhaltet das Exceptionhandling wenn die PasswordCopAPI nicht erreichbar ist.
 - Als separate Blackbox vom BackendServer erlaubt es der APIHandler jederzeit die API zur Überprüfung der Passwörter zu ändern ohne den BackendServer zu beeinflussen.
 
-# BackendServer
+### BackendServer
 - Verwaltet die Request des Users welche vom ClientHandler weitergereicht werden (Abfragen, Ändern und Hinzufügen von Passwörtern)
 - Kümmert sich um die Authentifizierung der User
 - Stellt das Bindeglied zwischen LocalStorage, ClientHandler und APIHandler
 
-# LocalStorage
+### LocalStorage
 - Verarbeitet Schreib- und Leseanfragen and die Passwortdatenbank.
 - Beinhaltet die Ver- und Entschlüsselung von Passwörter
 
 
 
-# Ebene 2
+## Ebene 2
 
-# LocalStorage <Import/ExportHandler>
-- Der Import/ExportHandler nimmt Passwörter oder Listen an Passwörtern vom
-- BackendServer entgegen und gibt auch einzelne Passwörter oder Listen an Passwörtern zurück.
+### LocalStorage <Import/ExportHandler>
+Der Import/ExportHandler nimmt Passwörter oder Listen an Passwörtern vom BackendServer entgegen und gibt auch einzelne Passwörter oder Listen an Passwörtern zurück.
 
-# LocalStorage <DE/EncryptionHandler>
-- Nimmt Passwörter oder verschlüsselte Zeichenketten entgegen und gibt verschlüsselte
-- Zeichenketten oder entschlüsselte Passwörter zurück.
+### LocalStorage <DE/EncryptionHandler>
+Nimmt Passwörter oder verschlüsselte Zeichenketten entgegen und gibt verschlüsselte Zeichenketten oder entschlüsselte Passwörter zurück.
 
-# LocalStorage <DatabaseHandler>
-- Schreibt oder liest gespeicherte Passwortdaten aus.
+### LocalStorage <DatabaseHandler>
+Schreibt oder liest gespeicherte Passwortdaten aus.
   
-# BackendServer <RequestHandler>
-- Nimmt die Requests aus dem ClientHandler entgegen und schickt Responses mit den Daten
-- welche aus anderen Bausteinen gesammelt wurden.
+### BackendServer <RequestHandler>
+Nimmt die Requests aus dem ClientHandler entgegen und schickt Responses mit den Daten welche aus anderen Bausteinen gesammelt wurden.
 
-# BackendServer <AuthenticationHandler>
-- Nimmt AuthenticationRequests entgegen und authentifiziert die User gegen eine gewünschte
-- Directory
+### BackendServer <AuthenticationHandler>
+Nimmt AuthenticationRequests entgegen und authentifiziert die User gegen eine gewünschte Directory
 
   
   
   
 ## Laufzeitsicht
   
-# Passwort hinzufügen
+### Passwort hinzufügen
 ![image](https://github.com/Domain314/3_SWARC_arc42/assets/65196868/c52c05d5-403e-4654-b8f1-7cbe633e982e)
 
-Beschreibung: Nachdem der User authentifiziert wurde, wird die Passwordstärke mittels dedizierter API von PaswordCop geprüft und ausgegeben. Beim Bestehen des Tests wird das Passwort an den LocalStorage gesendet, verschlüsselt und gespeichert.
+**Beschreibung:** Nachdem der User authentifiziert wurde, wird die Passwordstärke mittels dedizierter API von PaswordCop geprüft und ausgegeben. Beim Bestehen des Tests wird das Passwort an den LocalStorage gesendet, verschlüsselt und gespeichert.
   
   
-# Passwort abfragen  
+### Passwort abfragen  
 ![image](https://github.com/Domain314/3_SWARC_arc42/assets/65196868/fad93237-429d-4202-8e61-eb88699a3f9a)
 
-Beschreibung: Nachdem der User authentifiziert wurde, wird das eingegebene Passwort abgerufen, entschlüsselt und ausgegeben
+**Beschreibung:** Nachdem der User authentifiziert wurde, wird das eingegebene Passwort abgerufen, entschlüsselt und ausgegeben
   
-# Passwort ist nicht stark genug
+### Passwort ist nicht stark genug
   
 ![image](https://github.com/Domain314/3_SWARC_arc42/assets/65196868/a86a658c-280f-4c53-9f96-6645ba285d34)
  
-Beschreibung: Wenn die Passwortstärke die Tests von PasswordCop nicht besteht, wird eine Fehlermeldung ausgegeben.  
+**Beschreibung:** Wenn die Passwortstärke die Tests von PasswordCop nicht besteht, wird eine Fehlermeldung ausgegeben.  
   
   
  
@@ -251,10 +247,11 @@ Beschreibung: Wenn die Passwortstärke die Tests von PasswordCop nicht besteht, 
   
 ![image](https://github.com/Domain314/3_SWARC_arc42/assets/65196868/27f4f128-6e60-46f4-9f94-6c3d422c8935)
   
-Begründung
-Da die Anforderungen sowohl Wiederverwendbarkeit als auch eine REST-Schnittstelle fordern ist die Kommunikation zwischen den einzelnen Bausteinen auf JSON und HTTPS Basis. Hierbei können Werte sowohl als einzelne Passwörter als auch als Listen übertragen werden.
+**Begründung**
+Da die Anforderungen sowohl Wiederverwendbarkeit als auch eine REST-Schnittstelle fordern ist die Kommunikation zwischen den einzelnen Bausteinen auf JSON und HTTPS Basis. 
+Hierbei können Werte sowohl als einzelne Passwörter als auch als Listen übertragen werden.
   
-Qualitäts- und/oder Leistungsmerkmale
+**Qualitäts- und/oder Leistungsmerkmale**
 HTTPS und JSON erlauben nicht nur für eine verschlüsselte und sichere Übertragung sondern bieten zukünftigen Entwicklern auch eine Möglichkeit der Lesbarkeit der einzelnen Kommunikationskomponenten, da JSON auch für einen Menschen verständlich aufgebaut ist
   
  
@@ -263,68 +260,45 @@ HTTPS und JSON erlauben nicht nur für eine verschlüsselte und sichere Übertra
   
 ![image](https://github.com/Domain314/3_SWARC_arc42/assets/65196868/c208a74a-402e-496c-82c6-dd1ce32a7841)
 
-## User Experience
-Mit einer Benutzeroberfläche welche Usern den Import und Export von Passwörtern sowie das
-einfache Abfragen, Hinzufügen und Ändern von Passwörtern erlaubt, kann diese Lösung
-Berührungsängsten mit dem neuen PasswortSafe vorbeugen.
+### User Experience
+Mit einer Benutzeroberfläche welche Usern den Import und Export von Passwörtern sowie das einfache Abfragen, Hinzufügen und Ändern von Passwörtern erlaubt, kann diese Lösung Berührungsängsten mit dem neuen PasswortSafe vorbeugen.
   
-## Sicherheitskonzepte
-Wie bereits in vorherigen Teilen des ARC42 Templates erwähnt wurde, ist ein großer Teil der
-Sicherheit auf Basis von Authentifizierung und Verschlüsselung. Sämtliche Passwortdaten
-werden verschlüsselt gespeichert und nur authentifizierte User können auf ihre Passwörter
-zugreifen.
+### Sicherheitskonzepte
+Wie bereits in vorherigen Teilen des ARC42 Templates erwähnt wurde, ist ein großer Teil der Sicherheit auf Basis von Authentifizierung und Verschlüsselung. Sämtliche Passwortdaten werden verschlüsselt gespeichert und nur authentifizierte User können auf ihre Passwörter zugreifen.
   
-## Betriebskonzepte
-Da die Lösung auf den eigenen Firmenservern gehostet wird bietet es den Usern eine hohe
-Verfügbarkeit im Firmennetzwerk an. Die Anzahl an Passwortdaten und Usern kann beliebig
-gewählt werden und bietet daher eine ausgezeichnete Skalierbarkeit.
+### Betriebskonzepte
+Da die Lösung auf den eigenen Firmenservern gehostet wird bietet es den Usern eine hohe Verfügbarkeit im Firmennetzwerk an. Die Anzahl an Passwortdaten und Usern kann beliebig gewählt werden und bietet daher eine ausgezeichnete Skalierbarkeit.
   
-## Unter-der-Haube
-Auftretende Fehler welche sowohl vom User (z.B. Password entspricht nicht den
-Anforderungen) als auch vom System (z.B. Nicht-Erreichbarkeit von PasswordCop)
-werden erkannt und als verständliche Fehlermeldung an den User übermittelt.
+### Unter-der-Haube
+Auftretende Fehler welche sowohl vom User (z.B. Password entspricht nicht den Anforderungen) als auch vom System (z.B. Nicht-Erreichbarkeit von PasswordCop) werden erkannt und als verständliche Fehlermeldung an den User übermittelt.
   
   
 ## Entwurfsentscheidungen
   
-Datenbankdesign: Mit einem MongoDB/JSON Backend, welches über eine API
-kommuniziert, haben wir die Möglichkeit die Datensätze beliebig zu skalieren und mit
-modernen Datenbanktechnologien zu arbeiten.
+**Datenbankdesign:** Mit einem MongoDB/JSON Backend, welches über eine API kommuniziert, haben wir die Möglichkeit die Datensätze beliebig zu skalieren und mit modernen Datenbanktechnologien zu arbeiten.
   
-Verschlüsselungstechnologie: Eine starke Verschlüsselungstechnologie (AES-256),
-ermöglicht die Passwörter langfristig zu schützen und sicherzustellen, dass sie nur von
-autorisierten Benutzern abgerufen werden können.
+**Verschlüsselungstechnologie:** Eine starke Verschlüsselungstechnologie (AES-256), ermöglicht die Passwörter langfristig zu schützen und sicherzustellen, dass sie nur von autorisierten Benutzern abgerufen werden können.
   
-Password-Cops API: Die Passwortstärke wird über eine dedizierte API kalkuliert, somit
-legen wir die Verantwortung aus, auf dem aktuellsten Stand der Passwort-Stärke zu
-bleiben und auch die betrieblichen Kosten der Kalkulationen selbst, bleiben uns erspart.
+**Password-Cops API:** Die Passwortstärke wird über eine dedizierte API kalkuliert, somit legen wir die Verantwortung aus, auf dem aktuellsten Stand der Passwort-Stärke zu bleiben und auch die betrieblichen Kosten der Kalkulationen selbst, bleiben uns erspart.
 (Siehe Laufzeitsicht)
   
-Wiederverwendbarkeit: Eine modularisierte Architektur, um das Backend schnell und
-einfach an andere Frontends anzubinden und um es für die Entwicklung von
-verschiedenen Clients zu nutzen. (Siehe Whitebox)
+**Wiederverwendbarkeit:** Eine modularisierte Architektur, um das Backend schnell und einfach an andere Frontends anzubinden und um es für die Entwicklung von verschiedenen Clients zu nutzen. 
+(Siehe Whitebox)
   
-Local Storage: Die Passwörter werden auch lokal gespeichert, um den offline Betrieb zu
-ermöglichen und auch um die eigenen Server zu schonen.
+**Local Storage:** Die Passwörter werden auch lokal gespeichert, um den offline Betrieb zu ermöglichen und auch um die eigenen Server zu schonen.
   
-Benutzerfreundlichkeit: Die Gestaltung einer intuitiven Benutzeroberfläche, um das
-System einfach zu bedienen.
+**Benutzerfreundlichkeit:** Die Gestaltung einer intuitiven Benutzeroberfläche, um das System einfach zu bedienen.
   
-CSV-Import/Export: Die Passwörter werden als CSV exportiert, da es der gängige und
-kompatible Weg ist, um es auch mit anderen Applikationen und Webanwendungen zu
-benutzen. Alternativ wäre eine proprietäres Datenformat, um die sichere Ablage zu
-gewährleisten, jedoch wäre dies nicht kompatibel mit anderen Anwendungen
+**CSV-Import/Export:** Die Passwörter werden als CSV exportiert, da es der gängige und kompatible Weg ist, um es auch mit anderen Applikationen und Webanwendungen zu benutzen. Alternativ wäre eine proprietäres Datenformat, um die sichere Ablage zu gewährleisten, jedoch wäre dies nicht kompatibel mit anderen Anwendungen
   
-Zuverlässigkeit: Das System ist verfügbar und fehlerfrei, auch unter Lastbedingungen und
-hoher Benutzeraktivität.
+**Zuverlässigkeit:** Das System ist verfügbar und fehlerfrei, auch unter Lastbedingungen und hoher Benutzeraktivität.
   
   
 ## Qualitätsbaum  
   
 ![image](https://github.com/Domain314/3_SWARC_arc42/assets/65196868/15771294-5e40-490a-9e4e-a78902f58b5e)
  
-  
-  
+
 ## Qualitätsszenarien
   
 | Titel | Szenario | Output |
