@@ -352,38 +352,9 @@ Auftretende Fehler welche sowohl vom User (z.B. Password entspricht nicht den An
 | Schlüsselmanagement | Verwaltung von Kryptografischen Schlüsseln, einschließlich Generierung, Speicherung und Verwaltung |
   
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-(UNFINISHED)
-| title | title | title |
-|-------|-------|-------|
-| text | text | text |
-
-
-
-
-
-
-
-
-
-
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 
 Score: 100/100
+Kommentar von Lektor: _"Die Ausarbeitung beinhaltet sämtliche vom Arc42 benötigten Inhalte."_
 
