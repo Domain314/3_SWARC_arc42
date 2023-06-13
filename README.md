@@ -8,7 +8,7 @@ Software Architecture - arc42 filled out (German)
 _arc42_, das Template zur Dokumentation von Software- und Systemarchitekturen.
 Erstellt von Dr. Gernot Starke, Dr. Peter Hruschka und Mitwirkenden.
 Template Revision: 7.0 DE (asciidoc-based), January 2017
-© We acknowledge that this document uses material from the arc42 architecture template,
+© We acknowledge that this document uses material from the _arc42_ architecture template,
 http://www.arc42.de. Created by Dr. Peter Hruschka & Dr. Gernot Starke.
 
 
@@ -234,13 +234,15 @@ Nimmt AuthenticationRequests entgegen und authentifiziert die User gegen eine ge
 ### Passwort abfragen  
 ![image](https://github.com/Domain314/3_SWARC_arc42/assets/65196868/fad93237-429d-4202-8e61-eb88699a3f9a)
 
-**Beschreibung:** Nachdem der User authentifiziert wurde, wird das eingegebene Passwort abgerufen, entschlüsselt und ausgegeben
+**Beschreibung:** 
+Nachdem der User authentifiziert wurde, wird das eingegebene Passwort abgerufen, entschlüsselt und ausgegeben
   
 ### Passwort ist nicht stark genug
   
 ![image](https://github.com/Domain314/3_SWARC_arc42/assets/65196868/a86a658c-280f-4c53-9f96-6645ba285d34)
  
-**Beschreibung:** Wenn die Passwortstärke die Tests von PasswordCop nicht besteht, wird eine Fehlermeldung ausgegeben.  
+**Beschreibung:** 
+Wenn die Passwortstärke die Tests von PasswordCop nicht besteht, wird eine Fehlermeldung ausgegeben.  
   
   
  
@@ -248,7 +250,7 @@ Nimmt AuthenticationRequests entgegen und authentifiziert die User gegen eine ge
   
 ![image](https://github.com/Domain314/3_SWARC_arc42/assets/65196868/27f4f128-6e60-46f4-9f94-6c3d422c8935)
   
-**Begründung**
+**Begründung:**
 Da die Anforderungen sowohl Wiederverwendbarkeit als auch eine REST-Schnittstelle fordern ist die Kommunikation zwischen den einzelnen Bausteinen auf JSON und HTTPS Basis. 
 Hierbei können Werte sowohl als einzelne Passwörter als auch als Listen übertragen werden.
   
