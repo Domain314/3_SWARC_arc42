@@ -356,5 +356,6 @@ Auftretende Fehler welche sowohl vom User (z.B. Password entspricht nicht den An
 --------------------------------------------------------------------------------
 
 Score: 100/100
+
 Kommentar von Lektor: _"Die Ausarbeitung beinhaltet sämtliche vom Arc42 benötigten Inhalte."_
 
