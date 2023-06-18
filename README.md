@@ -358,3 +358,4 @@ Score: 100/100
 
 Kommentar von Lektor: _"Die Ausarbeitung beinhaltet sämtliche vom Arc42 benötigten Inhalte."_
 
+
